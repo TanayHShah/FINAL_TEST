@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <style>
+      table,
+      tr,
+      th,
+      td {
+        border: 1px solid white;
+        border-collapse: collapse;
+        background-color: black;
+        color: red;
+        text-align: center;
+      }
+
+      .a {
+        float: left;
+        width: 30%;
+        background-color: pink;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form1">
+      <div class="a">
+        <p id="name"></p>
+        <br />
+        <a href="dashboard.html">Dashboard</a><br />
+        <br /><a href="users.html">Users</a><br />
+        <br /><a href="dashboard.html">Login Sessions</a><br />
+        <br /><a href="dashboard.html">Logout</a>
+      </div>
+      <input type="text" id="namee" placeholder="Name" />
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <input type="date" id="birthdate" placeholder="Birthdate" /><br />
+    </form>
+    <br /><button onclick="load()">SUBMIT</button>
+    <hr />
+    <div id="disp"></div>
+    <table id="done"></table>
+    <script>
+      var m = "Hello,";
+      m += localStorage.getItem("email");
+      document.getElementById("name").innerHTML = m;
+      var edit = new Array();
+      var del = new Array();
+      var t =
+        "<tr><th>ID</th><th>NAME</th><th>EMAIL</th><th>PASSWORD</th><th>BIRTHDATE</th><th>AGE</th><th>ACTION</th></tr> ";
+      var count = new Array();
+      var counter = JSON.parse(localStorage.getItem("object"));
+      if (counter == null) {
+        var display = "Empty Data";
+        document.getElementById("disp").innerHTML = display;
+      } else {
+        for (i = 0; i < counter.length; i++) {
+          t +=
+            "<tr><td>" +
+            counter[i].iid +
+            "</td><td>" +
+            counter[i].name +
+            "</td><td>" +
+            counter[i].email +
+            "</td><td>" +
+            counter[i].password +
+            "</td><td>" +
+            counter[i].birthdate +
+            "</td><td>" +
+            counter[i].age+
+            "</td><td>" +
+            edit[i] +
+            "</td><td>" +
+            del[i] +
+            "</td></tr>";
+        }
+      }
+      var disp_obj = new Array();
+      var y;
+      if (!localStorage.getItem("id1")) {
+        localStorage.setItem("id1", 0);
+      }
+      var Student = new Array();
+      var Person = function(name, email, password, birthdate) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.birthdate = birthdate;
+        this.iid = Number(a);
+        this.age=function (){
+            return this.birthdate;
+        }
+
+      };
+      function load() {
+        a = localStorage.getItem("id1");
+        names = document.getElementById("namee").value;
+        emails = document.getElementById("email").value;
+        pass = document.getElementById("password").value;
+        year = document.getElementById("birthdate").value;
+        Student[a] = new Person(names, emails, pass, year);
+        y = Student[a];
+        if (names == "") {
+          alert("Name Required");
+          return 0;
+        } else if (emails == "") {
+          alert("Email Required");
+          return 0;
+        } else if (pass == "") {
+          alert("Password Required");
+          return 0;
+        } else if (year == "") {
+          alert("Birthdate Required");
+          return 0;
+        } else {
+          var s = JSON.parse(localStorage.getItem("object"));
+          if (s != null) {
+            disp_obj = s;
+          }
+          disp_obj.push(y);
+          localStorage.setItem("object", JSON.stringify(disp_obj));
+          counter = JSON.parse(localStorage.getItem("object"));
+
+          t +=
+            "<tr><td>" +
+            counter[counter.length - 1].iid +
+            "</td><td>" +
+            counter[counter.length - 1].name +
+            "</td><td>" +
+            counter[counter.length - 1].email +
+            "</td><td>" +
+            counter[counter.length - 1].password +
+            "</td><td>" +
+            counter[counter.length - 1].birthdate +
+            "</td><td>" +
+           counter[counter.length-1].age +
+            "</td><td>" +
+            edit[counter.length - 1] +
+            "</td><td>" +
+            del[counter.length - 1] +
+            "</td></tr>";
+          a++;
+          localStorage.setItem("id1", a);
+        }
+        document.getElementById("done").innerHTML = t;
+      }
+
+    </script>
+  </body>
+</html>

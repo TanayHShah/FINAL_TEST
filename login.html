@@ -1,0 +1,58 @@
+<html>
+    <head>
+    <style>
+    .a{
+       
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        width:700px;
+        height: 300px;
+    }
+    #iid{
+        width:100%;
+    }
+    </style>
+    </head>
+    <body>
+        <div class="a">
+            <div>
+                <h1>LOGIN</h1>
+                <form action="dashboard.html">
+               <input type="email" placeholder="Email" id="email" required><br>
+               <br><input type="password" placeholder="Password" id="password" required><br>
+              <br> <button onclick="login()">LOGIN</button>
+            </form>
+               <p>OR</p>
+               <form id="iid" action="registration.html" onsubmit="return hide()">
+                <button onclick="hide()">REGISTER</button>   
+            </form>
+            </div>
+        </div>
+        <script>
+        function login(){
+    var email=document.getElementById("email").value;
+    var paas=document.getElementById("password").value;           
+            if(!localStorage.getItem(email))
+            {
+                alert("WRONG ID");
+            }
+            else{
+                if(localStorage.getItem(email) !== paas)
+                {
+                    alert("WRONG PASSWORD");
+                }
+            }
+
+        }
+        function hide(){
+            var c=localStorage.getItem("id");
+            if(c==0)
+            {
+                alert("ALREADY REGISTERED");
+                return false;
+            }
+        }
+        </script>
+    </body>
+</html>

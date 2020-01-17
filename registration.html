@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <style>
+            .a{
+               
+                border: 1px solid black;
+                display: flex;
+                justify-content: center;
+                width:700px;
+                height: 400px;
+            }
+            </style>
+
+    </head>
+    <body>
+        <div class="a">
+            <div>
+                <h1>REGISTRATION</h1>
+                <form id="form1" action="login.html" onsubmit="return check()">
+                    <input type="text" placeholder="Name" id="name1" required><br>
+                    <br><input type="email" placeholder="Email" id="email1" required><br>
+                   <br> <input type="password" placeholder="Password" id="pass1" required><br>
+                    <br><input type="password" placeholder="Confirm Password" id="finalpass1" required><br>
+                    <br><select name="cities" id="place" required>
+                        <option value="Ahmedabad">Ahmedabad</option>
+                        <option value="Bharuch">Bharuch</option>
+                        <option value="Surat">Surat</option>
+                    </select><br>
+                    <br><select name="states" id="LOCATION" required>
+                        <option value="GUJARAT">GUJARAT</option>
+                        <option value="BOMBAY">BOMBAY</option>
+                        <option value="RAJASTHAN">RAJASTHAN</option>
+                    </select><br>
+                    <br><input type="checkbox" required>Terms & Conditions<br>
+                    <br><button onclick="check()">REGISTER</button>
+                </form>
+            </div>
+        </div>
+        <script>
+          function check()
+            {
+                var email2=document.getElementById("email1").value;
+                var paas=document.getElementById("pass1").value;
+                    if(document.getElementById("pass1").value == document.getElementById("finalpass1").value){
+                        localStorage.setItem(email2,paas);
+                        localStorage.setItem("email",email2);
+                        localStorage.setItem("id",0);
+                   }
+                   else
+                   {
+                    alert("PASSWORD MISMATCH");
+                    return false;
+                       
+                   }
+            }
+        </script>
+    </body>
+</html>
